@@ -15,7 +15,7 @@
 
 **Lát cắt phát sẵn:** Trong **Đặt chỗ của tôi**, khi **hành khách** vừa nhận tin chuyến bay bị huỷ và nhắn hỏi, **AI đề xuất và giữ chỗ chuyến thay thế, hỏi lại cho rõ, đổi vé, hay chuyển nhân viên**, để khách tới nơi kịp mà không mất vé hay tiền vì một thao tác không đảo lại được.
 
-**Dữ liệu:** đặt chỗ dựng TRV-7Q2K; BM 213, 12/11 19:00, đã huỷ do bão; 2 hành khách Nguyễn Minh An (34 tuổi), Nguyễn Gia Bình (5 tuổi). BM 217 lúc 21:00 còn 1 chỗ (không đủ 2 người); BM 201 lúc 07:00 hôm sau còn 9; BM 205 lúc 09:30 còn 4. Hãng Bay Mẫu cho đổi miễn phí 1 lần trong 48 giờ hoặc hoàn toàn bộ, không bồi thường tiền mặt vì bão. Không phải dữ liệu hãng thật.
+**Dữ liệu:** đặt chỗ dựng TRV-7Q2K; BM 213, 12/11 19:00, đã huỷ do bão; 2 hành khách Trần Quốc Huy (34 tuổi), Trần Bảo Ngọc (5 tuổi). BM 217 lúc 21:00 còn 1 chỗ (không đủ 2 người); BM 201 lúc 07:00 hôm sau còn 9; BM 205 lúc 09:30 còn 4. Hãng Bay Mẫu cho đổi miễn phí 1 lần trong 48 giờ hoặc hoàn toàn bộ, không bồi thường tiền mặt vì bão. Không phải dữ liệu hãng thật.
 
 **Không làm:** (1) Không đổi tên người bay vì không có tool, rủi ro sai danh tính; chuyển nhân viên. (2) Không xử lý trẻ 5 tuổi bay một mình vì cần xác minh điều kiện và không có tool chuyên trách. (3) Không hứa bồi thường tiền mặt khi nguyên nhân huỷ là bão; chính sách dựng loại trừ khoản này. (4) Không thu thập thẻ/OTP hoặc thực hiện thanh toán.
 
@@ -84,15 +84,54 @@
 
 **Lời hứa thay đổi:** Không nói “Mình tự đổi chuyến cho bạn”, mà nói “Mình tìm và giữ chỗ giúp; chỉ đổi vé sau khi bạn xác nhận rõ chuyến và hành khách”.
 
-## §5. Prototype
+## §5. Prototype (Chặng 5)
 
-- **File:** `prototype/index.html` (HTML/CSS/JavaScript thuần, mở offline). **Không có AI call thật**; trạng thái và thao tác được mô phỏng bằng dữ liệu dựng. Không gọi hãng bay, không giao dịch, không API key.
-- **Ca A:** “Đổi đi, chuyến nào cũng được” → hỏi lại → chọn BM 201 → giữ chỗ 20 phút → xem bằng chứng → xác nhận riêng → đổi giả lập. Có thể huỷ giữ chỗ.
-- **Ca B:** “AI vừa đổi nhầm BM 205” → hiển thị lỗi, không có nút hoàn tác vé → chuyển nhân viên kèm tóm tắt giả lập.
-- **Ca C:** đường bình thường để so sánh việc không phải chờ nhân viên.
-- **Vị trí chú thích:** **1** = HAX G10 (không chắc thì thu hẹp); **2** = HAX G11 + PAIR Explainability (căn cứ); **3** = HAX G8/G9 + PAIR Graceful Failure (nhả giữ chỗ/chuyển người).
-- **Quyết định UI:** dùng nhãn trạng thái định tính và dữ liệu kiểm chứng thay vì phần trăm confidence không có căn cứ; chọn modal xác nhận tách biệt thay vì một nút “Đổi ngay” để chặn lỗi mất quyền đổi. Chọn nhả giữ chỗ thay vì nút “Hoàn tác vé” gây hứa sai.
-- **Ảnh cần bổ sung trước khi nộp:** chụp 1–2 ảnh màn hình từ `prototype/index.html` (ca A và B). Các số 1, 2, 3 đã có sẵn trên giao diện để chú thích.
+### 5.1. Thông tin prototype
+
+- **Tên:** FlightCare – Trợ lý hỗ trợ đổi chuyến bay bị huỷ.
+- **File:** `prototype/index.html`
+- **Công cụ:** HTML, CSS, JavaScript và VS Code.
+- **Mock:** Dữ liệu đặt vé, hành khách, phản hồi AI, giữ chỗ, đổi chuyến và hoàn vé.
+- **AI thật:** Không. Các chức năng được mô phỏng bằng JavaScript, không kết nối API.
+
+### 5.2. Ảnh minh hoạ và HAX/PAIR
+
+**Ảnh 1 – Ca A: Xử lý yêu cầu mơ hồ**
+
+![Ảnh 1 – Xử lý yêu cầu mơ hồ](image_0.png)
+
+| Số | Thành phần / Nguyên tắc HAX/PAIR | Mức tự chủ |
+|---|---|---|
+| 1 | **G10:** AI hỏi lại khi khách chưa chọn chuyến cụ thể | Không tự đổi vé |
+| 2 | **G11 / PAIR Trust:** Hiển thị căn cứ kiểm chứng | Tự tra cứu |
+| 3 | **G9:** Khách có thể sửa lựa chọn chuyến | Khách lựa chọn |
+| 4 | **G1:** Minh bạch quyền hạn của AI | Tự làm / Khách duyệt |
+
+**Ảnh 2 – Ca C: Giữ chỗ và xác nhận đổi chuyến**
+
+![Ảnh 2 – Xác nhận đổi chuyến](image.png)
+
+| Số | Thành phần / Nguyên tắc HAX/PAIR | Mức tự chủ |
+|---|---|---|
+| 5 | **G1:** Hiển thị trạng thái giữ chỗ tạm 20 phút | Tự giữ chỗ |
+| 6 | **G11:** Cảnh báo mất lượt đổi miễn phí | Cần khách duyệt |
+| 7 | **G8/G9:** Cho phép xác nhận hoặc huỷ thao tác | Khách quyết định |
+
+### 5.3. Quyết định thiết kế
+
+**Hiển thị độ chắc và bằng chứng:**
+
+- **Cân nhắc:** Phần trăm confidence, câu trả lời thuần văn bản hoặc nhãn trạng thái.
+- **Chọn:** Nhãn "Chưa chắc", "Đã kiểm tra" và khu vực "Căn cứ kiểm chứng".
+- **Lý do:** Giúp người dùng kiểm tra thông tin; không dùng phần trăm vì prototype chưa có AI thật để đo độ tin cậy.
+
+**Điều khiển mức tự chủ:**
+
+- **Cân nhắc:** AI tự làm toàn bộ, khách duyệt mọi thao tác hoặc phân quyền theo rủi ro.
+- **Chọn:** AI tự tra cứu, giữ chỗ tạm và chuyển nhân viên; khách duyệt đổi chuyến và hoàn vé.
+- **Lý do:** Giảm nguy cơ đổi nhầm vé, mất lượt đổi miễn phí hoặc gửi yêu cầu hoàn vé không thể rút lại.
+
+**Kết luận:** Prototype thể hiện nguyên tắc minh bạch, có căn cứ kiểm chứng và giới hạn quyền tự chủ của AI đối với các hành động khó đảo ngược.
 
 ## §6. Tốt là gì
 
@@ -105,7 +144,3 @@
 **Giới hạn:** đây là prototype mô phỏng, không chứng minh hệ thống backend thực sự chặn tool, tính nhất quán ghế trống hay thời gian xử lý nhân viên. Chưa kiểm thử nhiều người dùng, mạng lỗi, race condition hoặc yêu cầu hoàn thực tế.
 
 ## §7. Demo
-
-**Kịch bản 4 phút:** (1) 30 giây giới thiệu lát cắt và dữ liệu dựng. (2) Ca A: bấm chọn, giữ, xem cảnh báo, xác nhận hoặc nhả giữ. (3) Ca B: chuyển sang trạng thái đã đổi nhầm, chỉ ra không có nút hoàn tác vé và chuyển nhân viên. (4) Giải thích cost-of-error của `doi_chuyen_bay`; cho người xem đưa ca lạ.
-
-**Ca lạ trong buổi demo:** [điền sau khi TA/giảng viên đưa]. **Prototype đã xử lý:** [điền sau demo]. **Nhóm đổi ý gì:** [điền sau demo].
