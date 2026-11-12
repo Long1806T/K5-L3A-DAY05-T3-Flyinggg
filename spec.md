@@ -167,6 +167,8 @@ Nếu khách không xác nhận, hệ thống không thực hiện đổi vé ch
 
 **Giới hạn:** đây là prototype mô phỏng, không chứng minh hệ thống backend thực sự chặn tool, tính nhất quán ghế trống hay thời gian xử lý nhân viên. Chưa kiểm thử nhiều người dùng, mạng lỗi, race condition hoặc yêu cầu hoàn thực tế.
 
+**Lỗi còn lại:** khách đã tick và gửi hoàn rồi mới đổi ý thì thiết kế không cứu được (yêu cầu hoàn không rút lại được), chỉ còn cách chuyển nhân viên. Dữ liệu ghế trống có thể đã cũ lúc khách bấm xác nhận; hiện chưa kiểm tra lại ghế trước khi đổi.
+
 ## §7. Demo
 **Ca lạ trong buổi demo:**
 
