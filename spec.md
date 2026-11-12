@@ -124,7 +124,7 @@ Nếu khách không xác nhận, hệ thống không thực hiện đổi vé ch
 
 **Ảnh 1 – Ca A: Xử lý yêu cầu mơ hồ**
 
-![Ca A](image_1.png)
+![Ca A](prototype/image_1.png)
 
 | Số | Thành phần và nguyên tắc | Mức tự chủ |
 |---|---|---|
@@ -135,7 +135,7 @@ Nếu khách không xác nhận, hệ thống không thực hiện đổi vé ch
 
 **Ảnh 2 – Ca C: Xác nhận đổi chuyến**
 
-![Ca C](image_2.png)
+![Ca C](prototype/image_2.png)
 
 | Số | Thành phần và nguyên tắc | Mức tự chủ |
 |---|---|---|
