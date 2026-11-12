@@ -84,54 +84,77 @@
 
 **Lời hứa thay đổi:** Không nói “Mình tự đổi chuyến cho bạn”, mà nói “Mình tìm và giữ chỗ giúp; chỉ đổi vé sau khi bạn xác nhận rõ chuyến và hành khách”.
 
-## §5. Prototype (Chặng 5)
+
+## §5. Prototype
 
 ### 5.1. Thông tin prototype
 
 - **Tên:** FlightCare – Trợ lý hỗ trợ đổi chuyến bay bị huỷ.
 - **File:** `prototype/index.html`
 - **Công cụ:** HTML, CSS, JavaScript và VS Code.
-- **Mock:** Dữ liệu đặt vé, hành khách, phản hồi AI, giữ chỗ, đổi chuyến và hoàn vé.
-- **AI thật:** Không. Các chức năng được mô phỏng bằng JavaScript, không kết nối API.
+- **Dữ liệu:** Giả lập, không có backend hoặc đăng nhập.
+- **AI thật:** Không. Phản hồi AI và thao tác được mô phỏng bằng JavaScript.
 
-### 5.2. Ảnh minh hoạ và HAX/PAIR
+### 5.2. Luồng demo 4 phút
+
+1. **Ca A – Yêu cầu mơ hồ:** Chọn tình huống "Đổi đi, chuyến nào cũng được". AI cảnh báo thiếu thông tin, hiển thị căn cứ và yêu cầu khách chọn chuyến cụ thể.
+2. **Kiểm tra chuyến bay:** BM 217 chỉ còn 1 ghế cho 2 hành khách nên không thể chọn.
+3. **Ca C – Yêu cầu rõ ràng:** Chọn BM 201, giữ chỗ 20 phút và mở hộp thoại xác nhận đổi chuyến.
+4. **Kiểm soát quyền tự chủ:** Khách thấy thông tin chuyến mới, cảnh báo mất lượt đổi miễn phí và quyết định xác nhận hoặc huỷ.
+
+Hai màn hình quan trọng nhất là **cảnh báo yêu cầu mơ hồ** và **hộp thoại xác nhận đổi chuyến**.
+
+### 5.3. Độ chắc và căn cứ của AI
+
+- Hiển thị nhãn trạng thái như "Chưa chắc", "Đã kiểm tra" và "Cần hỗ trợ".
+- Khu vực "Căn cứ kiểm chứng" hiển thị mã đặt chỗ, số hành khách và số ghế còn lại.
+- Không hiển thị phần trăm confidence vì prototype không có mô hình AI thật để đo độ tin cậy.
+
+### 5.4. Mức tự chủ trên giao diện
+
+| Mức | Thể hiện trên prototype |
+|---|---|
+| **Tự làm** | Tra cứu thông tin, giữ chỗ tạm 20 phút và chuyển nhân viên; giữ chỗ có thể huỷ. |
+| **Cần người duyệt** | Đổi chuyến và hoàn vé yêu cầu khách xác nhận sau khi xem hậu quả. |
+| **Cấm** | Không tự đổi vé khi yêu cầu mơ hồ, không chọn chuyến thiếu ghế hoặc tự thực hiện hành động ngoài thẩm quyền; hướng khách đến nhân viên. |
+
+Nếu khách không xác nhận, hệ thống không thực hiện đổi vé chính thức.
+
+### 5.5. Ảnh minh hoạ và HAX/PAIR
 
 **Ảnh 1 – Ca A: Xử lý yêu cầu mơ hồ**
 
-![Ảnh 1 – Xử lý yêu cầu mơ hồ](image_0.png)
+![Ca A](image_1.png)
 
-| Số | Thành phần / Nguyên tắc HAX/PAIR | Mức tự chủ |
+| Số | Thành phần và nguyên tắc | Mức tự chủ |
 |---|---|---|
-| 1 | **G10:** AI hỏi lại khi khách chưa chọn chuyến cụ thể | Không tự đổi vé |
+| 1 | **G10:** Cảnh báo thiếu thông tin, yêu cầu khách chọn chuyến | Không tự đổi vé |
 | 2 | **G11 / PAIR Trust:** Hiển thị căn cứ kiểm chứng | Tự tra cứu |
-| 3 | **G9:** Khách có thể sửa lựa chọn chuyến | Khách lựa chọn |
-| 4 | **G1:** Minh bạch quyền hạn của AI | Tự làm / Khách duyệt |
+| 3 | **G9:** Cho phép sửa lựa chọn chuyến | Khách lựa chọn |
+| 4 | **G1:** Bảng quyền hạn AI | Tự làm / Cần duyệt |
 
-**Ảnh 2 – Ca C: Giữ chỗ và xác nhận đổi chuyến**
+**Ảnh 2 – Ca C: Xác nhận đổi chuyến**
 
-![Ảnh 2 – Xác nhận đổi chuyến](image.png)
+![Ca C](image_2.png)
 
-| Số | Thành phần / Nguyên tắc HAX/PAIR | Mức tự chủ |
+| Số | Thành phần và nguyên tắc | Mức tự chủ |
 |---|---|---|
-| 5 | **G1:** Hiển thị trạng thái giữ chỗ tạm 20 phút | Tự giữ chỗ |
+| 5 | **G1:** Trạng thái giữ chỗ tạm 20 phút | Tự giữ chỗ |
 | 6 | **G11:** Cảnh báo mất lượt đổi miễn phí | Cần khách duyệt |
-| 7 | **G8/G9:** Cho phép xác nhận hoặc huỷ thao tác | Khách quyết định |
+| 7 | **G8/G9:** Nút xác nhận hoặc huỷ | Khách quyết định |
 
-### 5.3. Quyết định thiết kế
+### 5.6. Xử lý ca lạ và quyết định thiết kế
 
-**Hiển thị độ chắc và bằng chứng:**
+**Ca lạ:** Prototype chưa có AI thật để hiểu tình huống ngoài các kịch bản dựng sẵn. Theo thiết kế, yêu cầu thiếu dữ liệu hoặc vượt thẩm quyền sẽ được chuyển nhân viên, không tự suy đoán.
 
-- **Cân nhắc:** Phần trăm confidence, câu trả lời thuần văn bản hoặc nhãn trạng thái.
-- **Chọn:** Nhãn "Chưa chắc", "Đã kiểm tra" và khu vực "Căn cứ kiểm chứng".
-- **Lý do:** Giúp người dùng kiểm tra thông tin; không dùng phần trăm vì prototype chưa có AI thật để đo độ tin cậy.
+**Các phương án đã cân nhắc:**
 
-**Điều khiển mức tự chủ:**
+- **Độ chắc:** Không chọn phần trăm confidence vì thiếu cơ sở đo lường; chọn nhãn trạng thái và căn cứ kiểm chứng để người dùng tự đối chiếu.
+- **Mức tự chủ:** Không chọn AI tự làm toàn bộ vì đổi/hoàn vé nhầm khó khắc phục; không bắt khách duyệt mọi thao tác vì gây chậm trễ. Chọn phân quyền theo rủi ro.
+- **Giao diện:** Không chọn chatbot thuần văn bản như mẫu; chọn dashboard với thẻ chuyến bay, cảnh báo và hộp thoại xác nhận để thể hiện rõ trạng thái và quyền quyết định.
 
-- **Cân nhắc:** AI tự làm toàn bộ, khách duyệt mọi thao tác hoặc phân quyền theo rủi ro.
-- **Chọn:** AI tự tra cứu, giữ chỗ tạm và chuyển nhân viên; khách duyệt đổi chuyến và hoàn vé.
-- **Lý do:** Giảm nguy cơ đổi nhầm vé, mất lượt đổi miễn phí hoặc gửi yêu cầu hoàn vé không thể rút lại.
+**Kết luận:** Prototype cho phép tương tác qua ca khó, thể hiện các mức tự chủ khác nhau và liên kết nguyên tắc HAX/PAIR với các thành phần cụ thể trên giao diện.
 
-**Kết luận:** Prototype thể hiện nguyên tắc minh bạch, có căn cứ kiểm chứng và giới hạn quyền tự chủ của AI đối với các hành động khó đảo ngược.
 
 ## §6. Tốt là gì
 
