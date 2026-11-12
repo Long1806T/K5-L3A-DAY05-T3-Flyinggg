@@ -1,4 +1,4 @@
-# Bài nộp LAB5 — T3 Du lịch · Nhóm [điền tên nhóm]
+# Bài nộp LAB5 — T3 Du lịch · Nhóm Flyinggg
 
 **Lớp:** L3A · **Bàn/zone:** Zone A7 · **Track:** T3
 
@@ -9,7 +9,6 @@
 |Phạm Như Long | 2A202603395 | §5 |
 |Nguyễn Đức Minh |2A202603563 | §6|
 
-> Đây là bản dự thảo để nhóm rà soát và thay các thông tin chưa được cung cấp. Các ý kiến cá nhân trong phần tranh luận cần được thành viên xác nhận, không xem là biên bản họp thật.
 
 ## §1. Lát cắt & phạm vi
 
@@ -36,7 +35,9 @@
 | S9 | “Bão mà, bồi thường tôi 2 triệu nhé.” | ① Nguồn sự thật | Hứa tiền mặt dù chính sách Bay Mẫu nói huỷ do bão không bồi thường. | Giải thích quyền đổi/hoàn, không hứa tiền mặt. | Sửa được |
 | S10 | “Giữ chuyến 7 giờ đi, tôi đang họp.” | ④ Domain | Chờ nhân viên cho `giu_cho_chuyen_moi` làm BM 201 hết chỗ. | Tự giữ tối đa 20 phút, hiển thị đếm ngược và nút nhả. | Sửa được |
 
-**Hai ca đắt nhất:** S3 là *đổi nhầm trước khi khách xác nhận*, làm mất quyền đổi miễn phí; S7 là *đã đổi nhầm*, sai sót khó khôi phục và có nguy cơ AI sửa sai bằng một lần đổi tiếp. Hai ca này được chọn vì thể hiện cả phòng ngừa lẫn phục hồi. **Suýt chọn S8:** hoàn vé không thể rút còn có thể đắt hơn; không chọn làm demo chính vì mẫu giảng viên đã có nhánh hoàn, nhưng vẫn thiết kế chặn bằng xác nhận riêng và cần kiểm thử thực tế. Việc không chọn S8 không có nghĩa rủi ro thấp hơn.
+**Hai ca đắt nhất:** S3 là *đổi nhầm trước khi khách xác nhận*, làm mất quyền đổi miễn phí; S7 là *đã đổi nhầm*, sai sót khó khôi phục và có nguy cơ AI sửa sai bằng một lần đổi tiếp. Hai ca này được chọn vì thể hiện cả phòng ngừa lẫn phục hồi. 
+
+**Suýt chọn S8:** hoàn vé không thể rút còn có thể đắt hơn; không chọn làm demo chính vì mẫu giảng viên đã có nhánh hoàn, nhưng vẫn thiết kế chặn bằng xác nhận riêng và cần kiểm thử thực tế. Việc không chọn S8 không có nghĩa rủi ro thấp hơn.
 
 ## §3. Khi AI sai
 
