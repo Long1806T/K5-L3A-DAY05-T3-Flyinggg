@@ -167,3 +167,17 @@ Nếu khách không xác nhận, hệ thống không thực hiện đổi vé ch
 **Giới hạn:** đây là prototype mô phỏng, không chứng minh hệ thống backend thực sự chặn tool, tính nhất quán ghế trống hay thời gian xử lý nhân viên. Chưa kiểm thử nhiều người dùng, mạng lỗi, race condition hoặc yêu cầu hoàn thực tế.
 
 ## §7. Demo
+**Ca lạ trong buổi demo:**
+
+Khách muốn đổi sang BM 217 lúc 21:00 vì cần bay ngay trong tối nay, nhưng chuyến này chỉ còn 1 ghế trong khi đặt chỗ có 2 hành khách.
+
+**Prototype đã xử lý:**
+
+- Hiển thị BM 217 không đủ ghế cho cả hai hành khách.
+- Không cho phép chọn chuyến này để đổi cho cả đặt chỗ.
+- Đề xuất BM 201 hoặc BM 205 còn đủ ghế.
+- Nếu khách vẫn yêu cầu BM 217, chuyển nhân viên hỗ trợ thay vì tự tách đặt chỗ.
+
+**Nhóm đổi ý:**
+
+Ban đầu nhóm tập trung vào việc ngăn AI đổi nhầm chuyến. Sau khi xem xét tình huống thiếu ghế, nhóm nhận thấy cần kiểm tra số ghế theo tổng số hành khách trước khi cho phép giữ chỗ. Vì vậy, nhóm bổ sung nguyên tắc không tự tách đặt chỗ và chuyển nhân viên khi yêu cầu vượt khả năng xử lý.
